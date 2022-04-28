@@ -13,6 +13,11 @@ app.post( '/usuarios', ( req, res ) => {
     res.json( { Method: 'POST' } );
 } );
 
+app.post( '/datos-json', ( req, res ) => {
+    const user = req.body
+    res.json( { user } );
+} );
+
 app.put( '/', ( req, res ) => {
     res.json( { Method: 'PUT' } );
 } );
