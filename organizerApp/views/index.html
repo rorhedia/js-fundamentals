@@ -9,6 +9,20 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hola</h1>
+
+<h1>Hola</h1>
+
+<script>
+    async function request() {
+        try {
+            const result = await fetch( "/users" );
+            return await result.json();
+        } catch ( error ) {
+            console.log( error )
+        }
+    }
+
+    request();
+</script>
 </body>
 </html>
