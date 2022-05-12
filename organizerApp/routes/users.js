@@ -1,21 +1,23 @@
-const express = require( 'express' );
+const express      = require( 'express' );
+const Users        = require( '../services/users' );
+const errorHandler = require( '../helpers/errorHandler' );
 
-const router = express.Router();
+function users( app ) {
 
-router.get( '/users', ( req, res ) => {
-    res.json( { data: 'hola' } )
-} );
+    const router  = express.Router();
+    const userSvc = new Users();
 
-router.post( '/users', ( req, res ) => {
-    res.json( { data: 'hola' } )
-} );
+    app.use( '/users', router );
 
-router.put( '/users', ( req, res ) => {
-    res.json( { data: 'hola' } )
-} );
+    router.get( '/', async ( req, res ) => {
+        try {
+            const users = await userSvc.getAll();
+            return res.json( users );
+        } catch ( e ) {
+            errorHandler( res, e.message );
+        }
+    } );
 
-router.delete( '/users', ( req, res ) => {
-    res.json( { data: 'hola' } )
-} );
+}
 
-module.exports = router;
+module.exports = users
